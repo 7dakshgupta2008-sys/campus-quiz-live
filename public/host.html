@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Quiz Host — Projector</title>
+<link rel="stylesheet" href="/style.css" />
+<style>
+  body { display: flex; flex-direction: column; min-height: 100vh; padding: 40px 60px; }
+  .topbar { display: flex; justify-content: space-between; align-items: center; }
+  .brand { font-weight: 900; font-size: 1.4rem; letter-spacing: 0.02em; }
+  .brand span { color: var(--amber); }
+  .stage { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+
+  /* Lobby */
+  #lobby { display: flex; gap: 60px; align-items: center; }
+  #lobby .codebox { text-align: center; }
+  #lobby .code { font-family: var(--mono); font-size: 5.5rem; font-weight: 700; letter-spacing: 0.08em; color: var(--amber); }
+  #lobby .qr { background: white; padding: 14px; border-radius: 16px; }
+  #lobby .qr img { display: block; width: 220px; height: 220px; }
+  #lobby .count { font-family: var(--mono); font-size: 1.6rem; margin-top: 10px; }
+
+  /* Question */
+  #questionView { display: none; width: 100%; max-width: 1100px; }
+  #questionView .qmeta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+  #qText { font-size: 2.6rem; font-weight: 900; line-height: 1.2; margin-bottom: 40px; }
+  #optionsGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .opt { border-radius: 16px; padding: 26px; font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; color: var(--ink); }
+  .opt.o0 { background: var(--amber); }
+  .opt.o1 { background: var(--teal); }
+  .opt.o2 { background: var(--magenta); color: var(--paper); }
+  .opt.o3 { background: var(--blue); color: var(--paper); }
+  .liveCount { font-family: var(--mono); }
+
+  /* Results */
+  #resultsView { display: none; width: 100%; max-width: 1000px; }
+  .bar-row { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; }
+  .bar-label { width: 46px; font-weight: 900; font-size: 1.2rem; }
+  .bar-track { flex: 1; background: var(--ink-2); border-radius: 10px; height: 46px; overflow: hidden; position: relative; }
+  .bar-fill { height: 100%; border-radius: 10px; animation: barGrow 0.7s ease-out; display: flex; align-items: center; justify-content: flex-end; padding-right: 12px; font-family: var(--mono); font-weight: 700; color: var(--ink); }
+  .bar-fill.correct { outline: 3px solid var(--teal); }
+  .fastest { margin-top: 30px; font-size: 1.2rem; }
+  .fastest b { color: var(--teal); }
+  #leaderboard { margin-top: 30px; width: 100%; }
+  #leaderboard h3 { font-family: var(--mono); letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.9rem; color: var(--amber); }
+  .lb-row { display: flex; justify-content: space-between; font-size: 1.3rem; padding: 8px 0; border-bottom: 1px solid rgba(245,243,238,0.08); }
+  .lb-row .rank { color: var(--amber); font-family: var(--mono); width: 40px; }
+  .lb-row .score { font-family: var(--mono); font-weight: 700; }
+
+  /* End */
+  #endView { display: none; }
+  .podium { display: flex; gap: 24px; align-items: flex-end; justify-content: center; margin: 30px 0; }
+  .podium .place { border-radius: 12px 12px 0 0; padding: 20px; text-align: center; font-weight: 900; }
+  .podium .p1 { background: var(--amber); color: var(--ink); height: 200px; width: 160px; }
+  .podium .p2 { background: var(--teal); color: var(--ink); height: 150px; width: 150px; }
+  .podium .p3 { background: var(--magenta); color: var(--paper); height: 110px; width: 150px; }
+
+  .controls { display: flex; gap: 16px; justify-content: center; margin-top: 30px; }
+  .footer-hint { text-align: center; font-family: var(--mono); font-size: 0.8rem; opacity: 0.5; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">CAMPUS<span>QUIZ</span>LIVE</div>
+  <div id="ringHolder" class="ring-wrap" style="display:none;">
+    <svg viewBox="0 0 90 90" width="78" height="78">
+      <circle class="ring-bg" cx="45" cy="45" r="38"></circle>
+      <circle id="ringFg" class="ring-fg" cx="45" cy="45" r="38" stroke-dasharray="238.7" stroke-dashoffset="0"></circle>
+    </svg>
+    <div class="ring-num" id="ringNum">0</div>
+  </div>
+</div>
+
+<div class="stage">
+
+  <div id="lobby">
+    <div class="codebox">
+      <div class="eyebrow">Room Code</div>
+      <div class="code" id="roomCode">----</div>
+      <div class="count" id="playerCount">0 players joined</div>
+    </div>
+    <div class="qr" id="qrBox"><img id="qrImg" src="" alt="QR to join" /></div>
+  </div>
+
+  <div id="questionView">
+    <div class="qmeta">
+      <div class="eyebrow" id="qProgress">QUESTION 1 / 5</div>
+      <div class="liveCount" id="liveCount">0 / 0 answered</div>
+    </div>
+    <div id="qText"></div>
+    <div id="optionsGrid"></div>
+  </div>
+
+  <div id="resultsView">
+    <div class="eyebrow" style="margin-bottom:18px;">Results</div>
+    <div id="barsHolder"></div>
+    <div class="fastest" id="fastestLine"></div>
+    <div id="leaderboard">
+      <h3>Leaderboard</h3>
+      <div id="lbRows"></div>
+    </div>
+  </div>
+
+  <div id="endView">
+    <div class="eyebrow">Final Results</div>
+    <div class="podium" id="podium"></div>
+    <div id="fullLb"></div>
+  </div>
+
+</div>
+
+<div class="controls">
+  <button class="btn" id="startBtn">Start Quiz</button>
+  <button class="btn" id="nextBtn" style="display:none;">Next / Reveal</button>
+  <button class="btn secondary" id="resetBtn">Reset Game</button>
+</div>
+<div class="footer-hint">Players join at the QR code / room code shown above. Keep this tab open on the projector.</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const socket = io();
+const shapeColors = ['o0','o1','o2','o3'];
+let currentDuration = 0, currentTotal = 0;
+let countdownInterval = null;
+
+const el = id => document.getElementById(id);
+
+socket.on('connect', () => socket.emit('host:join'));
+
+socket.on('host:welcome', (data) => {
+  el('roomCode').textContent = data.roomCode;
+  el('qrImg').src = data.qrDataUrl;
+  el('playerCount').textContent = `${data.playerCount} players joined`;
+});
+
+socket.on('lobby:update', (data) => {
+  el('roomCode').textContent = data.roomCode;
+  el('playerCount').textContent = `${data.playerCount} players joined`;
+});
+
+socket.on('question:liveCount', (data) => {
+  el('liveCount').textContent = `${data.answered} / ${data.total} answered`;
+});
+
+socket.on('question:show', (data) => {
+  showView('questionView');
+  el('qProgress').textContent = `QUESTION ${data.index + 1} / ${data.total}`;
+  el('qText').textContent = data.question;
+  const grid = el('optionsGrid');
+  grid.innerHTML = '';
+  data.options.forEach((opt, i) => {
+    const div = document.createElement('div');
+    div.className = `opt ${shapeColors[i]}`;
+    div.textContent = opt;
+    grid.appendChild(div);
+  });
+  el('nextBtn').textContent = 'Reveal Answer';
+  el('nextBtn').style.display = 'inline-block';
+  el('startBtn').style.display = 'none';
+  startCountdown(data.duration);
+});
+
+socket.on('results:show', (data) => {
+  showView('resultsView');
+  clearInterval(countdownInterval);
+  el('ringHolder').style.display = 'none';
+  const bars = el('barsHolder');
+  bars.innerHTML = '';
+  const total = data.distribution.reduce((a,b) => a+b, 0) || 1;
+  const optEls = document.querySelectorAll('#optionsGrid .opt');
+  const labels = ['A','B','C','D'];
+  data.distribution.forEach((count, i) => {
+    const pct = Math.round((count/total) * 100);
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="bar-label">${labels[i]}</div>
+      <div class="bar-track">
+        <div class="bar-fill ${i === data.correctIndex ? 'correct' : ''}" style="width:${pct}%; background:${['#FFB020','#2EE6A6','#FF3D71','#3D8BFF'][i]};">${count}</div>
+      </div>
+    `;
+    bars.appendChild(row);
+  });
+  el('fastestLine').innerHTML = data.fastestCorrect
+    ? `⚡ Fastest correct answer: <b>${escapeHtml(data.fastestCorrect.name)}</b> (${(data.fastestCorrect.ms/1000).toFixed(2)}s)`
+    : `No one answered correctly this round.`;
+  const lb = el('lbRows');
+  lb.innerHTML = '';
+  data.leaderboard.forEach((p, i) => {
+    const row = document.createElement('div');
+    row.className = 'lb-row';
+    row.innerHTML = `<span class="rank">#${i+1}</span><span>${escapeHtml(p.name)}</span><span class="score">${p.score}</span>`;
+    lb.appendChild(row);
+  });
+  el('nextBtn').textContent = 'Next Question';
+});
+
+socket.on('game:end', (data) => {
+  showView('endView');
+  el('nextBtn').style.display = 'none';
+  const podium = el('podium');
+  podium.innerHTML = '';
+  const order = [1,0,2]; // 2nd, 1st, 3rd visual order
+  const medalClass = ['p2','p1','p3'];
+  order.forEach((rankIdx, slot) => {
+    const p = data.leaderboard[rankIdx];
+    if (!p) return;
+    const div = document.createElement('div');
+    div.className = `place ${medalClass[slot]}`;
+    div.innerHTML = `#${rankIdx+1}<br>${escapeHtml(p.name)}<br>${p.score}`;
+    podium.appendChild(div);
+  });
+  const rest = el('fullLb');
+  rest.innerHTML = data.leaderboard.slice(3).map((p,i) =>
+    `<div class="lb-row"><span class="rank">#${i+4}</span><span>${escapeHtml(p.name)}</span><span class="score">${p.score}</span></div>`
+  ).join('');
+});
+
+el('startBtn').onclick = () => socket.emit('host:start');
+el('nextBtn').onclick = () => socket.emit('host:next');
+el('resetBtn').onclick = () => {
+  if (confirm('Reset the whole game? Scores will be cleared.')) {
+    socket.emit('host:reset');
+    showView('lobby');
+    el('startBtn').style.display = 'inline-block';
+    el('nextBtn').style.display = 'none';
+  }
+};
+
+function showView(id) {
+  ['lobby','questionView','resultsView','endView'].forEach(v => el(v).style.display = (v === id) ? (v==='lobby'?'flex':'block') : 'none');
+}
+
+function startCountdown(duration) {
+  currentDuration = duration;
+  el('ringHolder').style.display = 'block';
+  const circumference = 238.7;
+  let remaining = duration;
+  el('ringNum').textContent = Math.ceil(remaining);
+  el('ringFg').style.strokeDashoffset = 0;
+  clearInterval(countdownInterval);
+  countdownInterval = setInterval(() => {
+    remaining -= 0.1;
+    if (remaining <= 0) { remaining = 0; clearInterval(countdownInterval); }
+    el('ringNum').textContent = Math.ceil(remaining);
+    el('ringFg').style.strokeDashoffset = circumference * (1 - remaining / duration);
+  }, 100);
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+</script>
+</body>
+</html>
