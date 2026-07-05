@@ -1,37 +1,43 @@
 [
-  {
-    "question": "Which data structure uses LIFO (Last In First Out) order?",
-    "options": ["Queue", "Stack", "Linked List", "Graph"],
-    "correctIndex": 1,
-    "duration": 15
-  },
-  {
-    "question": "What does 'HTTP' stand for?",
-    "options": [
-      "HyperText Transfer Protocol",
-      "High Transfer Text Protocol",
-      "Hyperlink Text Transport Process",
-      "Host Transfer Text Program"
-    ],
-    "correctIndex": 0,
-    "duration": 15
-  },
-  {
-    "question": "Which planet is known as the Red Planet?",
-    "options": ["Venus", "Jupiter", "Mars", "Saturn"],
-    "correctIndex": 2,
-    "duration": 10
-  },
-  {
-    "question": "Thapar Institute of Engineering & Technology is located in which city?",
-    "options": ["Chandigarh", "Patiala", "Ludhiana", "Amritsar"],
-    "correctIndex": 1,
-    "duration": 10
-  },
-  {
-    "question": "Which company developed the Claude AI models?",
-    "options": ["OpenAI", "Google DeepMind", "Anthropic", "Meta"],
-    "correctIndex": 2,
-    "duration": 10
-  }
+  { "question": "What does CPU stand for?", "options": ["Central Processing Unit", "Computer Processing Unit", "Central Program Unit", "Central Processor Utility"], "correctIndex": 0, "duration": 15 },
+  { "question": "What does HTML stand for?", "options": ["Hyper Transfer Markup Language", "HyperText Markup Language", "High Text Markup Language", "HyperText Modern Language"], "correctIndex": 1, "duration": 15 },
+  { "question": "What does RAM stand for?", "options": ["Random Access Memory", "Rapid Access Memory", "Read Access Memory", "Random Allocation Memory"], "correctIndex": 0, "duration": 15 },
+  { "question": "In which year did India gain independence?", "options": ["1945", "1950", "1947", "1942"], "correctIndex": 2, "duration": 10 },
+  { "question": "Who was the first Prime Minister of India?", "options": ["Mahatma Gandhi", "Sardar Vallabhbhai Patel", "Jawaharlal Nehru", "Dr. Rajendra Prasad"], "correctIndex": 2, "duration": 10 },
+  { "question": "Who wrote the Indian National Anthem?", "options": ["Bankim Chandra Chatterjee", "Rabindranath Tagore", "Sarojini Naidu", "Muhammad Iqbal"], "correctIndex": 1, "duration": 10 },
+  { "question": "Who was known as the 'Iron Man of India'?", "options": ["Jawaharlal Nehru", "Bhagat Singh", "Subhas Chandra Bose", "Sardar Vallabhbhai Patel"], "correctIndex": 3, "duration": 10 },
+  { "question": "What is the smallest country in the world by area?", "options": ["Monaco", "Vatican City", "San Marino", "Liechtenstein"], "correctIndex": 1, "duration": 10 },
+  { "question": "Which is the longest river in the world?", "options": ["Amazon River", "Yangtze River", "Nile River", "Ganges River"], "correctIndex": 2, "duration": 10 },
+  { "question": "Which superhero universe does Iron Man belong to \u2014 Marvel or DC?", "options": ["DC", "Marvel", "Both", "Neither"], "correctIndex": 1, "duration": 10 },
+  { "question": "Who plays the role of 'Geet' in the Bollywood movie Jab We Met?", "options": ["Priyanka Chopra", "Kareena Kapoor", "Katrina Kaif", "Anushka Sharma"], "correctIndex": 1, "duration": 10 },
+  { "question": "What's the name of Tony Stark's AI assistant in the Marvel movies?", "options": ["FRIDAY", "ULTRON", "J.A.R.V.I.S.", "EDITH"], "correctIndex": 2, "duration": 10 },
+  { "question": "Which animated show features a sponge who lives in a pineapple under the sea?", "options": ["SpongeBob SquarePants", "Finding Nemo", "The Little Mermaid", "Octonauts"], "correctIndex": 0, "duration": 10 },
+  { "question": "In Harry Potter, what house is Harry sorted into?", "options": ["Slytherin", "Ravenclaw", "Gryffindor", "Hufflepuff"], "correctIndex": 2, "duration": 10 },
+  { "question": "Which Indian singer is known as the 'Nightingale of India'?", "options": ["Asha Bhosle", "Lata Mangeshkar", "Shreya Ghoshal", "Kishori Amonkar"], "correctIndex": 1, "duration": 10 },
+  { "question": "Name the Punjabi singer known for songs like 'Brown Munde' and global fame.", "options": ["Diljit Dosanjh", "Sidhu Moose Wala", "AP Dhillon", "Guru Randhawa"], "correctIndex": 2, "duration": 10 },
+  { "question": "Which country gifted the Statue of Liberty to the USA?", "options": ["United Kingdom", "France", "Spain", "Italy"], "correctIndex": 1, "duration": 10 },
+  { "question": "What's the chemical formula for table salt?", "options": ["NaCl", "KCl", "CaCl2", "NaOH"], "correctIndex": 0, "duration": 10 },
+  { "question": "How many bones does an adult human body have?", "options": ["196", "216", "206", "226"], "correctIndex": 2, "duration": 10 },
+  { "question": "Which is the fastest land animal in the world?", "options": ["Lion", "Cheetah", "Horse", "Antelope"], "correctIndex": 1, "duration": 10 },
+  { "question": "Deepest point on earth?", "options": ["Puerto Rico Trench", "Mariana Trench", "Java Trench", "Tonga Trench"], "correctIndex": 1, "duration": 10 },
+  { "question": "Which is the largest ocean on earth?", "options": ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"], "correctIndex": 3, "duration": 10 },
+  { "question": "Who is the headmaster of Hogwarts during most of the series?", "options": ["Severus Snape", "Albus Dumbledore", "Minerva McGonagall", "Gilderoy Lockhart"], "correctIndex": 1, "duration": 10 },
+  { "question": "Which platform at King's Cross Station leads to Hogwarts?", "options": ["Platform 8", "Platform 10", "Platform 9\u00be", "Platform 12"], "correctIndex": 2, "duration": 10 },
+  { "question": "What are the names of Harry's two best friends?", "options": ["Neville and Luna", "Ron Weasley and Hermione Granger", "Fred and George", "Draco and Cho"], "correctIndex": 1, "duration": 10 },
+  { "question": "How many Horcruxes did Voldemort intentionally create?", "options": ["Five", "Seven", "Six", "Four"], "correctIndex": 2, "duration": 10 },
+  { "question": "What is the name of Thor's axe forged in Avengers: Infinity War?", "options": ["Mjolnir", "Gungnir", "Stormbreaker", "Jarnbjorn"], "correctIndex": 2, "duration": 10 },
+  { "question": "Which Indian cricketer is known as 'Captain Cool'?", "options": ["Virat Kohli", "MS Dhoni", "Rohit Sharma", "Sourav Ganguly"], "correctIndex": 1, "duration": 10 },
+  { "question": "Who was the first player to score a double century in ODI cricket?", "options": ["Virender Sehwag", "Rohit Sharma", "Sachin Tendulkar", "Virat Kohli"], "correctIndex": 2, "duration": 10 },
+  { "question": "Which Indian cricketer is called 'King Kohli'?", "options": ["Rohit Sharma", "Virat Kohli", "KL Rahul", "Shikhar Dhawan"], "correctIndex": 1, "duration": 10 },
+  { "question": "What comes once in a minute, twice in a moment, and never in a thousand years?", "options": ["The letter \"E\"", "The letter \"M\"", "The letter \"N\"", "The letter \"T\""], "correctIndex": 1, "duration": 15 },
+  { "question": "I have cities but no houses, rivers but no water, and forests but no trees. What am I?", "options": ["A globe", "A map", "A dream", "A book"], "correctIndex": 1, "duration": 15 },
+  { "question": "What can travel around the world while staying in one corner?", "options": ["A coin", "A stamp", "A letter", "A photograph"], "correctIndex": 1, "duration": 15 },
+  { "question": "What gets wetter as it dries?", "options": ["A sponge", "A towel", "Skin", "Hair"], "correctIndex": 1, "duration": 15 },
+  { "question": "What has a neck but no head?", "options": ["A shirt", "A guitar", "A bottle", "A road"], "correctIndex": 2, "duration": 15 },
+  { "question": "What has hands but cannot clap?", "options": ["A clock", "A statue", "A glove", "A robot"], "correctIndex": 0, "duration": 15 },
+  { "question": "How many hearts does an octopus have?", "options": ["1", "2", "3", "4"], "correctIndex": 2, "duration": 10 },
+  { "question": "What is the largest organ in the human body?", "options": ["Liver", "Skin", "Brain", "Lungs"], "correctIndex": 1, "duration": 10 },
+  { "question": "Which blood group is called the universal donor?", "options": ["AB positive", "O negative (O\u2212)", "A positive", "B negative"], "correctIndex": 1, "duration": 10 },
+  { "question": "Which is the smallest bone in the human body?", "options": ["Stapes (in the ear)", "Femur", "Radius", "Phalanges"], "correctIndex": 0, "duration": 10 },
+  { "question": "Who was the first Indian woman to climb Mt. Everest?", "options": ["Santosh Yadav", "Bachendri Pal", "Arunima Sinha", "Premlata Agarwal"], "correctIndex": 1, "duration": 10 }
 ]
