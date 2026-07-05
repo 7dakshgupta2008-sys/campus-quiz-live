@@ -1,0 +1,78 @@
+:root {
+  --ink: #12142B;
+  --ink-2: #1B1E3D;
+  --paper: #F5F3EE;
+  --amber: #FFB020;
+  --teal: #2EE6A6;
+  --magenta: #FF3D71;
+  --blue: #3D8BFF;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace;
+  --disp: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--disp);
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.scoreboard-digits {
+  font-family: var(--mono);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--amber);
+  opacity: 0.85;
+}
+
+.btn {
+  font-family: var(--disp);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 14px;
+  padding: 16px 28px;
+  cursor: pointer;
+  transition: transform 0.08s ease, filter 0.15s ease;
+  color: var(--ink);
+  background: var(--amber);
+}
+.btn:active { transform: scale(0.96); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn.secondary { background: transparent; color: var(--paper); border: 2px solid var(--paper); }
+
+.shape {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  margin-right: 10px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* Countdown ring */
+.ring-wrap { position: relative; width: 78px; height: 78px; }
+.ring-wrap svg { transform: rotate(-90deg); }
+.ring-bg { fill: none; stroke: rgba(245,243,238,0.15); stroke-width: 8; }
+.ring-fg { fill: none; stroke: var(--amber); stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 0.25s linear; }
+.ring-num {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-weight: 700; font-size: 1.6rem;
+}
+
+@keyframes popIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes barGrow { from { width: 0; } }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
