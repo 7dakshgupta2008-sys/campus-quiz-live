@@ -1,0 +1,37 @@
+[
+  {
+    "question": "Which data structure uses LIFO (Last In First Out) order?",
+    "options": ["Queue", "Stack", "Linked List", "Graph"],
+    "correctIndex": 1,
+    "duration": 15
+  },
+  {
+    "question": "What does 'HTTP' stand for?",
+    "options": [
+      "HyperText Transfer Protocol",
+      "High Transfer Text Protocol",
+      "Hyperlink Text Transport Process",
+      "Host Transfer Text Program"
+    ],
+    "correctIndex": 0,
+    "duration": 15
+  },
+  {
+    "question": "Which planet is known as the Red Planet?",
+    "options": ["Venus", "Jupiter", "Mars", "Saturn"],
+    "correctIndex": 2,
+    "duration": 10
+  },
+  {
+    "question": "Thapar Institute of Engineering & Technology is located in which city?",
+    "options": ["Chandigarh", "Patiala", "Ludhiana", "Amritsar"],
+    "correctIndex": 1,
+    "duration": 10
+  },
+  {
+    "question": "Which company developed the Claude AI models?",
+    "options": ["OpenAI", "Google DeepMind", "Anthropic", "Meta"],
+    "correctIndex": 2,
+    "duration": 10
+  }
+]
